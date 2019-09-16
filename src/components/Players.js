@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import style from 'styled-components';
+import '../App.css'
+import {
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle
+  } from 'reactstrap';
 
-
+const Title = style.h1`
+  margin: 25px;
+`;
 
 
 class TopPlayers extends Component {
@@ -73,16 +81,16 @@ class TopPlayers extends Component {
             <div className='App'>
 
             <>
-            <h1>Search PDGA Players!</h1>
+            <Title>Search Professional Disc Golf  Players!</Title>
             <form onSubmit={(event) => this.getSearchData(event)}>
-                <input 
-                type='text'
+                <input className='search'
+                type='text' placeholder='search here' 
                 value={this.state.search}
                 onChange={ this.handleInputChange }
                 />
 
                 
-                <input type='submit' value="Search"></input>
+                <button className='button' type='submit' value="Search">Search</button>
             </form>
             
             <div> {this.state.searchData.map(player => {
@@ -93,9 +101,14 @@ class TopPlayers extends Component {
                         
                     }}
                     >
-                    <ul><li>{player.name}</li>
-                    <li><img src={player.image}/></li>
-                    </ul>
+                    <div>
+                        <Card style={{width: '18rem'}}>
+                            <CardImg top width="100%" src={player.image} alt="Player Profile Pic" />
+                            <CardBody>
+                            <CardTitle className='cardTitle'>{player.name}</CardTitle>
+                            </CardBody>
+                        </Card>
+                    </div>
                     </Link>
                 )
             })
