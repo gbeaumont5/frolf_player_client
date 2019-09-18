@@ -33,13 +33,16 @@ class TopPlayers extends Component {
     }
 
     async getPlayers () {
-        const response = await axios.get(`http://localhost:3000/players`)
+        const response = await axios.get(`https://frolf-player-api.herokuapp.com/players`)
         const data = response.data
         console.log(data)
         data.forEach(function(image){
             if (image.image === ""){
                 image.image = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
             }
+        })
+        data.forEach(function(player){
+            player.name = player.name.toLowerCase();
         })
         this.setState({
             players: data
@@ -60,7 +63,8 @@ class TopPlayers extends Component {
     async handleInputChange(event) {
         event.preventDefault()
         console.log('click')
-        const search = event.target.value;
+        let search = event.target.value;
+        search = search.toLowerCase();
         await this.setState({
             search: search
         })
@@ -93,7 +97,7 @@ class TopPlayers extends Component {
                 <button className='button' type='submit' value="Search">Search</button>
             </form>
             
-            <div> {this.state.searchData.map(player => {
+            <div className='flexResults'> {this.state.searchData.map(player => {
                 return(
                     <Link to={`player/${player.id}`}
                     onClick={(id) => {
@@ -101,14 +105,15 @@ class TopPlayers extends Component {
                         
                     }}
                     >
-                    <div>
-                        <Card style={{width: '18rem'}}>
+                        
+                        <Card className='playerCard' style={{width: '18rem'}}>
                             <CardImg top width="100%" src={player.image} alt="Player Profile Pic" />
                             <CardBody>
                             <CardTitle className='cardTitle'>{player.name}</CardTitle>
                             </CardBody>
                         </Card>
-                    </div>
+                      
+                   
                     </Link>
                 )
             })

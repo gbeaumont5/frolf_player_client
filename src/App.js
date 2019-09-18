@@ -5,7 +5,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import ShowPlayer from './components/ShowPlayer'
 import Posts from './components/RedditPosts'
 import axios from 'axios'
+import How from './components/HowToPlay'
 import style from 'styled-components';
+
 
 const HeaderNav = style.section`
         background-color: #63B4D1;
@@ -48,6 +50,7 @@ class Player extends Component {
                      <HeaderNav>
                         <nav>
                             <Link className='link' to='/'>Home</Link>
+                            <Link className='link' to='/howtoplay'>What is Disc Golf?</Link>
                             <Link className='link' to='/posts/'>Interesting Reddit Posts</Link>
                         </nav>
                     </HeaderNav>
@@ -63,6 +66,10 @@ class Player extends Component {
                             <ShowPlayer playerId={this.state.playerId}
                             {...props}
                             />
+                        )}/>
+                        <Route path={`/howtoplay/`}
+                        render={props => (
+                            <How {...props} />
                         )}/>
                         <Route path={`/posts/`}
                         render={props => (

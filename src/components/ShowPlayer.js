@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import style from 'styled-components';
+
+const Title = style.h1`
+  margin: 25px;
+`;
+
+const Stats = style.ul`
+    margin: 25px;
+`;
 
 class ShowPlayer extends Component {
     constructor(props) {
@@ -15,7 +24,7 @@ class ShowPlayer extends Component {
         this.getPlayers()
     }
         async getPlayers () {
-            const response = await axios.get(`http://localhost:3000/players`)
+            const response = await axios.get(`https://frolf-player-api.herokuapp.com/players`)
             const data = response.data
             console.log(data)
             data.forEach(function(image){
@@ -46,12 +55,12 @@ class ShowPlayer extends Component {
                 <div> {this.state.player.map(player => {
                 return(
                     <div>
-                    <h1>{player.name}</h1>
+                    <Stats>
+                    <Title>{player.name}</Title>
                     <img src={player.image}/>
-                    <ul>
-                        <li>Events attended in 2018: {player.events}</li>
-                        <li>Earnings in 2018: ${player.earnings}</li>
-                    </ul>
+                        <li className='stats'>Events attended in 2018: {player.events}</li>
+                        <li className='stats'>Earnings in 2018: ${player.earnings}</li>
+                    </Stats>
                     </div>
                 )
             })

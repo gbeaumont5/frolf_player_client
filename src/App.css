@@ -19,9 +19,12 @@ a {
 
 .cardTitle {
   font-size: 30px;
+  text-transform: capitalize;
 }
 
-
+.stats{
+  margin-top: 20px;
+}
 
 
 img {
@@ -55,12 +58,28 @@ ul{
   
 }
 
+.flexResults{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.playerCard{
+  margin: 10px;
+}
+
 
 
 .searchResults{
  
   border-style: 50px solid black;
   
+}
+
+.rules{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 25px;
 }
 
 
